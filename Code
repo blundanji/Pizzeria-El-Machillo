@@ -1,1 +1,126 @@
 #Proyecto pizzeria el machillo
+package arraylist;
+ 
+import java.util.ArrayList;
+import java.util.Scanner;
+public class AplicativoArrayList {
+
+	ArrayList<String> listadeEmpleados; //primero creo el arraylist
+	
+	public static void main(String[] args) {
+		
+		AplicativoArrayList LISTA_empleados=new AplicativoArrayList();
+		LISTA_empleados.listadeEmpleados=new ArrayList();
+		LISTA_empleados.leerOpcion();
+
+	}
+
+	public void leerOpcion() {
+		Scanner sc=new Scanner(System.in);
+		int opcion;
+		
+		do {
+			
+			System.out.println("\n Modulo De Empleados");
+			System.out.println("[1] Agregar");
+			System.out.println("[2] Buscar");
+			System.out.println("[3] Modificar datos de un Empleado");
+			System.out.println("[4] Eliminar Empleado");
+			System.out.println("[5] Insertar Empleado");
+			System.out.println("[6] Mostrar Empleados");
+			System.out.println("[7] Salir\n");
+			System.out.println("Ingrese opción (1-7): ");
+			
+			opcion=sc.nextInt();
+			
+			switch (opcion) {
+			case 1:
+				Ingrese_empleadO();
+				break;
+
+			default:
+			case 2:
+				buscar_empleadO();
+				break;
+			case 3:
+				modificar_empleadO();
+				break;
+			case 4:
+				eliminar_empleadO();
+				break;
+			
+			case 6:
+				mostrar_LISTA_empleados();
+				break;
+			case 7:
+			}
+		}while (opcion !=7);
+	}
+	
+	public void Ingrese_empleadO() {
+		Scanner sc=new Scanner(System.in);
+		String empleado;
+		System.out.println("Ingrese el nombre del empleado: ");
+		empleado=sc.nextLine();
+		listadeEmpleados.add(empleado);
+	}
+	
+	public void buscar_empleadO() {
+		Scanner sc=new Scanner(System.in);
+		String empleado;
+		int indice;
+		System.out.println("Que empleado desea buscar: ");
+		empleado=sc.nextLine();
+		indice=listadeEmpleados.indexOf(empleado);
+		if(indice != -1) {
+			System.out.println("Este dato está en la posición " +indice);
+		}else {
+			System.err.println("No se encuentra el dato solicitado");
+		}
+	}
+	
+	public void modificar_empleadO() {
+		Scanner sc=new Scanner(System.in);
+		String Empleado_actual, Nuevo_dato_empleado;
+		int indice;
+		System.out.println("Valor a modificar: ");
+		Empleado_actual=sc.nextLine();
+		indice=listadeEmpleados.indexOf(Empleado_actual);
+		if(indice != -1) {
+			System.out.println("Nuevo valor: ");
+			Nuevo_dato_empleado = sc.nextLine();
+			listadeEmpleados.set(indice, Nuevo_dato_empleado);
+		}else {
+			System.err.println("No se encuentra el dato solicitado");
+		}
+	}
+	
+	public void eliminar_empleadO() {
+		Scanner sc=new Scanner(System.in);
+		String empleado;
+		int indice;
+		System.err.println("¿Estás seguro?");
+		
+		System.err.println("¿Qué deseas eliminar?");
+		empleado=sc.nextLine();
+		indice=listadeEmpleados.indexOf(empleado);
+		if(indice != -1) {
+			listadeEmpleados.remove(indice);
+			System.err.println("Empleado eliminado");
+		}else {
+			System.err.println("No se encuentra el Empleado solicitado");
+		}
+	}
+	
+	
+	public void mostrar_LISTA_empleados() {
+		if(!listadeEmpleados.isEmpty()) {
+			System.out.println("Elementos de la lista: ");
+			for (int i=0; i<listadeEmpleados.size();i++) {
+				System.out.println(listadeEmpleados.get(i));
+			}
+		}else {
+			System.err.println("No existen valores en la lista");
+		}
+	}
+}
