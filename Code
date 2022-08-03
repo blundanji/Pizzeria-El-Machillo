@@ -1,8 +1,7 @@
 #Proyecto pizzeria el machillo
 package arraylist;
- 
 import java.util.ArrayList;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 public class AplicativoArrayList {
 
 	ArrayList<String> listadeEmpleados; //primero creo el arraylist
@@ -16,22 +15,18 @@ public class AplicativoArrayList {
 	}
 
 	public void leerOpcion() {
-		Scanner sc=new Scanner(System.in);
+		
 		int opcion;
 		
 		do {
-			
-			System.out.println("\n Modulo De Empleados");
-			System.out.println("[1] Agregar");
-			System.out.println("[2] Buscar");
-			System.out.println("[3] Modificar datos de un Empleado");
-			System.out.println("[4] Eliminar Empleado");
-			System.out.println("[5] Insertar Empleado");
-			System.out.println("[6] Mostrar Empleados");
-			System.out.println("[7] Salir\n");
-			System.out.println("Ingrese opción (1-7): ");
-			
-			opcion=sc.nextInt();
+			opcion=Integer.parseInt(JOptionPane.showInputDialog(" Modulo De Empleados"
+                                + "[1] Agregar"
+                                + "[2] Buscar"
+                                + "[3] Modificar datos de un Empleado"
+                                + "[4] Eliminar Empleado"
+                                + "[5] Insertar Empleado"
+                                + "[6] Mostrar Empleados"
+                                + "[7] Salir"));
 			
 			switch (opcion) {
 			case 1:
@@ -53,74 +48,71 @@ public class AplicativoArrayList {
 				mostrar_LISTA_empleados();
 				break;
 			case 7:
+                              break;  
 			}
 		}while (opcion !=7);
 	}
 	
 	public void Ingrese_empleadO() {
-		Scanner sc=new Scanner(System.in);
 		String empleado;
-		System.out.println("Ingrese el nombre del empleado: ");
-		empleado=sc.nextLine();
-		listadeEmpleados.add(empleado);
+                String apellido;
+		empleado=JOptionPane.showInputDialog("Ingrese el nombre del empleado: ");
+		apellido=JOptionPane.showInputDialog("Ingrese el apellido: ");
+                listadeEmpleados.add(empleado);
+                listadeEmpleados.add(apellido);
 	}
 	
 	public void buscar_empleadO() {
-		Scanner sc=new Scanner(System.in);
 		String empleado;
 		int indice;
-		System.out.println("Que empleado desea buscar: ");
-		empleado=sc.nextLine();
+		empleado=JOptionPane.showInputDialog("ingrese el nombre a buscar");
 		indice=listadeEmpleados.indexOf(empleado);
 		if(indice != -1) {
-			System.out.println("Este dato está en la posición " +indice);
+			JOptionPane.showMessageDialog(null,"Este dato está en la posición " +indice);
 		}else {
-			System.err.println("No se encuentra el dato solicitado");
+			JOptionPane.showMessageDialog(null,"Este dato no está ");
 		}
 	}
 	
 	public void modificar_empleadO() {
-		Scanner sc=new Scanner(System.in);
 		String Empleado_actual, Nuevo_dato_empleado;
 		int indice;
-		System.out.println("Valor a modificar: ");
-		Empleado_actual=sc.nextLine();
+		Empleado_actual=JOptionPane.showInputDialog("ingrese el nombre");
 		indice=listadeEmpleados.indexOf(Empleado_actual);
 		if(indice != -1) {
-			System.out.println("Nuevo valor: ");
-			Nuevo_dato_empleado = sc.nextLine();
+			Nuevo_dato_empleado = JOptionPane.showInputDialog("ingrese el nuevo nombre");
 			listadeEmpleados.set(indice, Nuevo_dato_empleado);
 		}else {
-			System.err.println("No se encuentra el dato solicitado");
+			JOptionPane.showMessageDialog(null,"Este dato no está ");
 		}
 	}
 	
 	public void eliminar_empleadO() {
-		Scanner sc=new Scanner(System.in);
+		
 		String empleado;
 		int indice;
-		System.err.println("¿Estás seguro?");
 		
-		System.err.println("¿Qué deseas eliminar?");
-		empleado=sc.nextLine();
+		
+		
+		empleado=JOptionPane.showInputDialog("que deseas eliminar");
 		indice=listadeEmpleados.indexOf(empleado);
 		if(indice != -1) {
 			listadeEmpleados.remove(indice);
-			System.err.println("Empleado eliminado");
+			JOptionPane.showMessageDialog(null,"eliminado ");
 		}else {
-			System.err.println("No se encuentra el Empleado solicitado");
+			JOptionPane.showMessageDialog(null,"Este dato no está ");
 		}
 	}
 	
 	
 	public void mostrar_LISTA_empleados() {
 		if(!listadeEmpleados.isEmpty()) {
-			System.out.println("Elementos de la lista: ");
+			JOptionPane.showMessageDialog(null,"empleados de la lista ");;
 			for (int i=0; i<listadeEmpleados.size();i++) {
-				System.out.println(listadeEmpleados.get(i));
+				JOptionPane.showMessageDialog(null,listadeEmpleados.get(i));
 			}
 		}else {
-			System.err.println("No existen valores en la lista");
+			JOptionPane.showMessageDialog(null,"no hay lista de empleados ");
 		}
 	}
 }
